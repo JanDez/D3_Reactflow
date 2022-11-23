@@ -1,6 +1,6 @@
-import { PanelItem } from "./types";
+import { PanelItemData } from "./types";
 
-const dataPanel: PanelItem[] = [
+const dataPanel: PanelItemData[] = [
     {
         id: "inicio",
         title: "Incio",

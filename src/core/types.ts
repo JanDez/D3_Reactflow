@@ -1,8 +1,8 @@
 export type DiagramNodeType = 'page' | 'element' | 'element-item'
 
-export interface PanelItem {
+export interface PanelItemData {
     id: string 
     title: string 
     subTitle: string 
-    type?: DiagramNodeType
+    type: DiagramNodeType
 }
