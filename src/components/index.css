@@ -5,13 +5,21 @@
     height: 100%;
   }
   
+.element-node {
+    background-color: rgba(50, 50, 255, 1);
+    color: white;
+    padding: 30px;
+}
+
 .dndflow aside {
     border-right: 1px solid #eee;
-    padding: 15px 10px;
+    background: rgba(31, 41, 100, 1);
+    color: white;
+    font-size: 16px;
     margin: auto;
-    font-size: 12px;
+    padding: 10px 20px;
     height: 90%;
-    background: rgba(0, 50, 150, 0.7);
+    width: 200px;
 }
 
 .dndflow aside .description {
@@ -50,10 +58,5 @@
 @media screen and (min-width: 768px) {
     .dndflow {
         flex-direction: row;
-    }
-
-    .dndflow aside {
-        width: 20%;
-        max-width: 250px;
     }
 }

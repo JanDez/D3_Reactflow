@@ -5,6 +5,7 @@ const dataPanel: PanelItem[] = [
         id: "inicio",
         title: "Incio",
         subTitle: "Info de la Pagina",
+        type: 'page'
     },
     {
         id: "about",

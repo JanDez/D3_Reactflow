@@ -6,10 +6,10 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   Controls,
+  Connection,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-
-import Sidebar from './Sidebar';
+import Panel from './Panel';
 
 import './index.css';
 
@@ -31,15 +31,15 @@ const DragAndDropCanvas = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance | null>(null);
 
-  const onConnect = useCallback((params: any) => setEdges((eds) => addEdge(params, eds)), []);
+  const onConnect = useCallback((params: Connection) => setEdges((eds) => addEdge(params, eds)), []);
 
-  const onDragOver = useCallback((event: any) => {
+  const onDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
   }, []);
 
   const onDrop = useCallback(
-    (event: any) => {
+    (event: React.DragEvent<HTMLDivElement>) => {
       event.preventDefault();
 
       if (reactFlowWrapper.current && reactFlowInstance) {
@@ -55,6 +55,7 @@ const DragAndDropCanvas = () => {
             x: event.clientX - reactFlowBounds.left,
             y: event.clientY - reactFlowBounds.top,
           });
+
           const newNode = {
             id: getId(),
             type,
@@ -81,12 +82,11 @@ const DragAndDropCanvas = () => {
             onInit={setReactFlowInstance}
             onDrop={onDrop}
             onDragOver={onDragOver}
-            fitView
-          >
+            fitView>
             <Controls />
           </ReactFlow>
         </div>
-        <Sidebar />
+        <Panel />
       </ReactFlowProvider>
     </div>
   );
