@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useRef, useState } from "react"
 import { 
     addEdge, 
     Background, 
@@ -14,6 +14,7 @@ import {
     useNodesState } from "reactflow"
 
 import 'reactflow/dist/style.css'
+import EdgeButton from "./CustomEdges/EdgeButton"
 import ElementNode from "./CustomNodes/ElementNode"
 import ElementNodeItem from "./CustomNodes/ElementNodeItem"
 import PageNode from "./CustomNodes/PageNode"
@@ -22,7 +23,7 @@ import './index.css'
 import Panel from "./Panel"
 
 let id = 0
-const generateId = () => `dndnode_${id++}`
+const generateNodeId = () => `dndnode_${id++}`
 
 const nodeTypes: NodeTypes = {
     elementNode: ElementNode,
@@ -30,19 +31,44 @@ const nodeTypes: NodeTypes = {
     elementNodeItem: ElementNodeItem
 }
 
+const edgeTypes = {
+    buttonEdge: EdgeButton,
+};
+
+const initialNodes = [
+    {
+      id: 'ewb-1',
+      type: 'input',
+      data: { label: 'Input 1' },
+      position: { x: 250, y: 0 },
+    },
+    { id: 'ewb-2', data: { label: 'Node 2' }, position: { x: 250, y: 300 } },
+    {
+        id: 'ewb-3',
+        type: 'input',
+        data: { label: 'Input 1' },
+        position: { x: 250, y: 400 },
+      },
+      { id: 'ewb-4', data: { label: 'Node 2' }, position: { x: 250, y: 450 } },
+  ];
+
 const AppCanvas = () => {
     const reactFlowContainer = useRef<HTMLDivElement | null>(null)
-    const [ nodes, setNodes, handleNodesChange ] = useNodesState([])
+    const [ nodes, setNodes, handleNodesChange ] = useNodesState(initialNodes)
     const [ edges, setEdges, handleEdgesChange ] = useEdgesState([])
     const [ reactFlowInstance, setReactFlowInstance ] = useState<ReactFlowInstance | null>(null)
 
-    useEffect(() => {
-        
-    }, [])
+    const handleDeleteEdge = useCallback((edgeId: string) => {
+        setEdges((edgs) => edgs.filter(edg => edg.id !== edgeId))
+    }, [setEdges])
 
     const handleConnect = useCallback((connection: Connection) => setEdges((pedges) => {
-        return addEdge(connection, pedges)
-    }), [setEdges])
+        return addEdge({
+            ...connection, 
+            type: 'buttonEdge',
+            data: { handleDeleteEdge }
+        }, pedges)
+    }), [setEdges, handleDeleteEdge])
 
     const handleDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault()
@@ -63,10 +89,8 @@ const AppCanvas = () => {
                 y: event.clientY - reactFlowBounds.top
             })
 
-            console.log('the new node type', type)
-
             const newNode: Node<any>= {
-                id: generateId(),
+                id: generateNodeId(),
                 type,
                 position,
                 data: { label: `${type} node` }
@@ -83,6 +107,7 @@ const AppCanvas = () => {
                     nodes={nodes}
                     edges={edges}
                     nodeTypes={nodeTypes}
+                    edgeTypes={edgeTypes}
                     onInit={setReactFlowInstance}
                     onConnect={handleConnect}
                     onNodesChange={handleNodesChange}

@@ -18,7 +18,7 @@ const ElementNodeItem = ({ isConnectable }: ElementNodeItemProps) => {
             </div>
             <Handle
                 type="target"
-                position={Position.Left}
+                position={Position.Right}
                 style={{ background: '#555' }}
                 onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={isConnectable} />

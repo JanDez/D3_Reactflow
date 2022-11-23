@@ -8,7 +8,7 @@ const PageNode = ({ isConnectable }: PageNodeProps) => {
     return (
         <>
             <Handle
-                type="source"
+                type='target'
                 position={Position.Left}
                 style={{ background: '#555' }}
                 onConnect={(params) => console.log('handle onConnect', params)}
@@ -18,7 +18,7 @@ const PageNode = ({ isConnectable }: PageNodeProps) => {
             </div>
             <Handle
                 type="target"
-                position={Position.Left}
+                position={Position.Right}
                 style={{ background: '#555' }}
                 onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={isConnectable} />
