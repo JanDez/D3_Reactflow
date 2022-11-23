@@ -1,10 +1,7 @@
-import { Handle, Position } from "reactflow"
+import { Handle, NodeProps, Position } from "reactflow"
+import CustomNodeHeader from "./CustomNodeHeader"
 
-interface PageNodeProps {
-    isConnectable: boolean
-}
-
-const PageNode = ({ isConnectable }: PageNodeProps) => {
+const PageNode = ({ isConnectable }: NodeProps) => {
     return (
         <>
             <Handle
@@ -14,7 +11,7 @@ const PageNode = ({ isConnectable }: PageNodeProps) => {
                 onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={isConnectable} />
             <div className="element-node">
-                <p>Page Node</p>
+                <CustomNodeHeader content="Page Node" />
             </div>
             <Handle
                 type="target"

@@ -1,10 +1,6 @@
-import { Handle, Position } from "reactflow"
+import { Handle, NodeProps, Position } from "reactflow"
 
-interface ElementNodeProps {
-    isConnectable: boolean
-}
-
-const ElementNode = ({ isConnectable }: ElementNodeProps) => {
+const ElementNode = ({ isConnectable }: NodeProps) => {
     return (
         <>
             <Handle

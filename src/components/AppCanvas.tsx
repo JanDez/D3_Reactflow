@@ -48,9 +48,9 @@ const initialNodes = [
         type: 'input',
         data: { label: 'Input 1' },
         position: { x: 250, y: 400 },
-      },
-      { id: 'ewb-4', data: { label: 'Node 2' }, position: { x: 250, y: 450 } },
-  ];
+    },
+    { id: 'ewb-4', data: { label: 'Node 2' }, position: { x: 250, y: 450 } },
+];
 
 const AppCanvas = () => {
     const reactFlowContainer = useRef<HTMLDivElement | null>(null)
