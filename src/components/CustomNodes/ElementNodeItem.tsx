@@ -1,6 +1,28 @@
-const ElementNodeItem = () => {
+import { Handle, Position } from "reactflow"
+
+interface ElementNodeItemProps {
+    isConnectable: boolean
+}
+
+const ElementNodeItem = ({ isConnectable }: ElementNodeItemProps) => {
     return (
-        <div className="element-node-item"></div>
+        <>
+            <Handle
+                type="source"
+                position={Position.Left}
+                style={{ background: '#555' }}
+                onConnect={(params) => console.log('handle onConnect', params)}
+                isConnectable={isConnectable} />
+            <div className="element-node">
+                <p>Element Node Item</p>
+            </div>
+            <Handle
+                type="target"
+                position={Position.Left}
+                style={{ background: '#555' }}
+                onConnect={(params) => console.log('handle onConnect', params)}
+                isConnectable={isConnectable} />
+        </>
     )
 }
 

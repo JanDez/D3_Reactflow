@@ -1,5 +1,5 @@
 import dataPanel from '../core/panelData';
-import { DiagramNodeType } from "../core/types";
+import { DiagramNodeType, panelTypeMapsToDiagramNode } from "../core/types";
 import PanelItem from "./PanelItem";
 
 interface PanelItemsListProps {
@@ -13,6 +13,7 @@ const PanelItemsList = ({ onDragStart }: PanelItemsListProps) => {
                 {dataPanel.map((itemData, index) => 
                     <PanelItem 
                         data={itemData} 
+                        nodeType={panelTypeMapsToDiagramNode[itemData.type] as DiagramNodeType}
                         onDragStart={onDragStart} 
                         key={index} />
                 )}
