@@ -6,10 +6,11 @@ interface WindowProps {
     title: string 
     description: string 
     onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
+    onSaveChanges: () => void
     onClose: () => void
 }
 
-const NodeFormWindow = ({ id, title, description, onInputChange, onClose }: WindowProps) => {
+const NodeFormWindow = ({ id, title, description, onInputChange, onSaveChanges, onClose }: WindowProps) => {
     return (
         <div className="window-container">
             <div className="window">
@@ -24,7 +25,8 @@ const NodeFormWindow = ({ id, title, description, onInputChange, onClose }: Wind
                         id={id} 
                         title={title} 
                         description={description} 
-                        onInputChange={onInputChange} />
+                        onInputChange={onInputChange} 
+                        onSaveChanges={onSaveChanges}/>
                 </div>
             </div>
         </div>

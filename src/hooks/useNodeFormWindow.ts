@@ -9,15 +9,15 @@ const initialNodeData: NodeFormData = {
 
 interface UseNodeFormWindow {
     nodes: Node<any>[]
+    updateNodeText: (nodeId: string, textData: NodeFormData) => void
 }
 
-const useNodeFormWindow = ({ nodes }: UseNodeFormWindow) => {
+const useNodeFormWindow = ({ nodes, updateNodeText }: UseNodeFormWindow) => {
     const [ showWindow, setShowWindow ] = useState(false)
     const [ nodeId, setNodeId] = useState<string | null>(null)
     const [ nodeFormData, setNodeFormData ] = useState<NodeFormData>({...initialNodeData})
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log(nodeFormData)
         const nformData = {...nodeFormData}
 
         if (e.target.id === 'title') nformData.title = e.target.value
@@ -33,6 +33,12 @@ const useNodeFormWindow = ({ nodes }: UseNodeFormWindow) => {
 
     const handleCloseWindow = () => {
         setShowWindow(false)
+    }
+
+    const handleSaveChanges = () => {
+        if (nodeId) updateNodeText(nodeId, nodeFormData)
+
+        handleCloseWindow()
     }
 
     useEffect(() => {
@@ -55,7 +61,8 @@ const useNodeFormWindow = ({ nodes }: UseNodeFormWindow) => {
         nodeFormData,
         handleInputChange,
         handleShowWindow, 
-        handleCloseWindow
+        handleCloseWindow,
+        handleSaveChanges
     }
 }
 

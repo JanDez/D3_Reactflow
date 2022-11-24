@@ -5,9 +5,10 @@ interface NodeDetailsFormProps {
     title: string 
     description: string 
     onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
+    onSaveChanges: () => void
 }
 
-const NodeDetailsForm = ({ id, title, description, onInputChange }: NodeDetailsFormProps) => {
+const NodeDetailsForm = ({ id, title, description, onInputChange, onSaveChanges }: NodeDetailsFormProps) => {
     return (
         <div className="form-container">
             <p>{id}</p>
@@ -31,6 +32,8 @@ const NodeDetailsForm = ({ id, title, description, onInputChange }: NodeDetailsF
                         type="text" 
                         value={description} />
                 </div>
+
+                <button onClick={onSaveChanges} type="button">Save</button>
             </form>
         </div>
     )

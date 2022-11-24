@@ -26,6 +26,7 @@ const AppCanvas = () => {
         edges,
         generateNodeId,
         setReactFlowInstance,
+        updateNodeText,
         handleEdgesChange,
         handleNodesChange
     } = useReactCanvasData()
@@ -35,20 +36,21 @@ const AppCanvas = () => {
         nodeId, 
         nodeFormData, 
         handleCloseWindow, 
+        handleSaveChanges,
         handleInputChange, 
-        handleShowWindow } = useNodeFormWindow({ nodes })
+        handleShowWindow } = useNodeFormWindow({ nodes, updateNodeText })
 
     const {
         handleConnect,
         handleDragOver,
         handleDrop,
     } = useReactCanvasHandlers({ 
-        reactFlowContainer, 
-        reactFlowInstance,
-        setEdges,
-        setNodes, 
-        generateNodeId, 
-        handleShowWindow
+            reactFlowContainer, 
+            reactFlowInstance,
+            setEdges,
+            setNodes, 
+            generateNodeId, 
+            handleShowWindow
     })
 
     return (
@@ -82,6 +84,7 @@ const AppCanvas = () => {
                         id={nodeId? nodeId : ''}
                         title={nodeFormData.title}
                         description={nodeFormData.description}
+                        onSaveChanges={handleSaveChanges}
                         onInputChange={handleInputChange}
                         onClose={handleCloseWindow}/>}
                 <Panel />

@@ -4,23 +4,7 @@ import EdgeButton from "../components/CustomEdges/EdgeButton";
 import ElementNode from "../components/CustomNodes/ElementNode";
 import ElementNodeItem from "../components/CustomNodes/ElementNodeItem";
 import PageNode from "../components/CustomNodes/PageNode";
-
-const initialNodes = [
-    {
-      id: 'ewb-1',
-      type: 'input',
-      data: { label: 'Input 1' },
-      position: { x: 250, y: 0 },
-    },
-    { id: 'ewb-2', data: { label: 'Node 2' }, position: { x: 250, y: 300 } },
-    {
-        id: 'ewb-3',
-        type: 'input',
-        data: { label: 'Input 1' },
-        position: { x: 250, y: 400 },
-    },
-    { id: 'ewb-4', data: { label: 'Node 2' }, position: { x: 250, y: 450 } },
-];
+import { NodeFormData } from "../core/types";
 
 const edgeTypes = {
     buttonEdge: EdgeButton,
@@ -37,17 +21,34 @@ const generateNodeId = () => `dndnode_${id++}`
 
 const useReactCanvasData = () => {
     const reactFlowContainer = useRef<HTMLDivElement | null>(null)
-    const [ nodes, setNodes, handleNodesChange ] = useNodesState(initialNodes)
+    const [ nodes, setNodes, handleNodesChange ] = useNodesState([])
     const [ edges, setEdges, handleEdgesChange ] = useEdgesState([])
     const [ reactFlowInstance, setReactFlowInstance ] = useState<ReactFlowInstance | null>(null)
 
-   return {
+    const updateNodeText = (nodeId: string, textData: NodeFormData) => {
+        setNodes(nds => nds.map(item => {
+            if (item.id === nodeId) {
+                item.data = {
+                    ...item.data,
+                    title: textData.title,
+                    description: textData.description
+                }
+
+                return item
+            }
+
+            return item
+        }))
+    }
+
+    return {
         reactFlowContainer,
         nodes, nodeTypes, setNodes, handleNodesChange,
         edges, edgeTypes, setEdges, handleEdgesChange,
         reactFlowInstance, setReactFlowInstance,
         generateNodeId,
-   }
+        updateNodeText
+    }
 }
 
 export default useReactCanvasData
