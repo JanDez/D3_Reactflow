@@ -81,7 +81,32 @@
 
 .window {
     display: flex;
+    flex-direction: column;
     background-color: white;
+    box-shadow: 0 0 15px gray;
+    border-radius: 10px;
+    padding: 25px;
     height: 300px;
     width: 300px;
+}
+
+.window-top {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    border: 2px rgba(31, 41, 100, 1) solid;
+    padding: 15px;
+    height: 25px;
+    width: 25px;
 }
