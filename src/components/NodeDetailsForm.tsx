@@ -1,20 +1,24 @@
-import useNodeDetailsForm from "../hooks/NodeDetailsForm/useNodeDetailsForm"
+import { ChangeEvent } from "react"
 
 interface NodeDetailsFormProps {
+    id: string 
     title: string 
     description: string 
+    onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-const NodeDetailsForm = ({ title: initialTitle, description: initialDescription }: NodeDetailsFormProps) => {
-    const { title, description, handleInputChange } = useNodeDetailsForm({ initialTitle, initialDescription })
-
+const NodeDetailsForm = ({ id, title, description, onInputChange }: NodeDetailsFormProps) => {
     return (
         <div className="form-container">
+            <p>{id}</p>
+            <p>{title}</p>
+            <p>{description}</p>
+            
             <form className="form">
                 <div className="form-field">
                     <label htmlFor="title">Title</label>
                     <input 
-                        onChange={handleInputChange} 
+                        onChange={onInputChange} 
                         id="title" 
                         type="text" 
                         value={title} />
@@ -22,7 +26,7 @@ const NodeDetailsForm = ({ title: initialTitle, description: initialDescription 
                 <div className="form-field">
                     <label htmlFor="description">Description</label>
                     <input 
-                        onChange={handleInputChange}
+                        onChange={onInputChange}
                         id="description" 
                         type="text" 
                         value={description} />

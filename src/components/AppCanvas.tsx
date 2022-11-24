@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react"
 import { 
     addEdge, 
     Background, 
@@ -21,7 +21,8 @@ import PageNode from "./CustomNodes/PageNode"
 import './index.css'
 
 import Panel from "./Panel"
-import Window from "./Window"
+import NodeFormWindow from "./NodeFormWindow"
+import { NodeFormData } from "../core/types"
 
 let id = 0
 const generateNodeId = () => `dndnode_${id++}`
@@ -53,23 +54,48 @@ const initialNodes = [
     { id: 'ewb-4', data: { label: 'Node 2' }, position: { x: 250, y: 450 } },
 ];
 
+const initialNodeData: NodeFormData = {
+    title: '',
+    description: ''
+}
+
 const AppCanvas = () => {
     const reactFlowContainer = useRef<HTMLDivElement | null>(null)
     const [ nodes, setNodes, handleNodesChange ] = useNodesState(initialNodes)
     const [ edges, setEdges, handleEdgesChange ] = useEdgesState([])
     const [ reactFlowInstance, setReactFlowInstance ] = useState<ReactFlowInstance | null>(null)
-    const [ currentNode, setCurrentNode ] = useState<Node | null>(null)
     const [ nodeId, setNodeId] = useState<string | null>(null)
-    
     const [ showWindow, setShowWindow ] = useState(false)
 
+    const [ nodeFormData, setNodeFormData ] = useState<NodeFormData>({...initialNodeData})
+
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        console.log(nodeFormData)
+        const nformData = {...nodeFormData}
+
+        if (e.target.id === 'title') nformData.title = e.target.value
+        else nformData.description = e.target.value
+
+        setNodeFormData(nformData)
+    }
+
     useEffect(() => {
+        console.log('use effect')
         if (showWindow) {
-            const node = nodes.find(node => node.id === nodeId)
+            const node = nodes.find(node => node.id === nodeId) as Node
+
+            console.log(node)
     
-            if (node) setCurrentNode(node)
+            if (node) {
+                console.log('the node i got', node)
+                setNodeId(node.id)
+                setNodeFormData({
+                    title: node.data.title,
+                    description: node.data.description
+                })
+            }
         }
-    }, [  nodes, nodeId, showWindow ])
+    }, [ nodes, nodeId, showWindow ])
 
     const handleShowWindow = (nodeId: string) => {
         setNodeId(nodeId)
@@ -111,11 +137,16 @@ const AppCanvas = () => {
                 y: event.clientY - reactFlowBounds.top
             })
 
+            const id = generateNodeId()
             const newNode: Node<any>= {
-                id: generateNodeId(),
+                id,
                 type,
                 position,
-                data: { label: `${type} node`, onEditHeader: handleShowWindow }
+                data: { 
+                    label: `${type} node`, 
+                    title: `Title ${id}`,
+                    description: `Description ${id}`,
+                    onEditHeader: handleShowWindow }
             }
 
             setNodes((pnodes) => pnodes.concat(newNode))
@@ -124,33 +155,39 @@ const AppCanvas = () => {
 
     return (
         <ReactFlowProvider>
-            <div className="reactflow-container" ref={reactFlowContainer}>
-                <ReactFlow 
-                    nodes={nodes}
-                    edges={edges}
-                    nodeTypes={nodeTypes}
-                    edgeTypes={edgeTypes}
-                    onInit={setReactFlowInstance}
-                    onConnect={handleConnect}
-                    onNodesChange={handleNodesChange}
-                    onEdgesChange={handleEdgesChange}
-                    onDragOver={handleDragOver}
-                    onDrop={handleDrop}
-                    snapToGrid
-                    snapGrid={[20, 20]}
-                    minZoom={0.5}
-                    maxZoom={2}
-                    fitView
-                    attributionPosition="bottom-left">
-                        <Background />
-                        <Controls />
-                        <MiniMap />
-                </ReactFlow>
-            </div>
-            { showWindow && <Window 
-                    data={currentNode} 
-                    onClose={handleCloseWindow}/>}
-            <Panel />
+            <>  
+                <div className="reactflow-container" ref={reactFlowContainer}>
+                    <ReactFlow 
+                        nodes={nodes}
+                        edges={edges}
+                        nodeTypes={nodeTypes}
+                        edgeTypes={edgeTypes}
+                        onInit={setReactFlowInstance}
+                        onConnect={handleConnect}
+                        onNodesChange={handleNodesChange}
+                        onEdgesChange={handleEdgesChange}
+                        onDragOver={handleDragOver}
+                        onDrop={handleDrop}
+                        snapToGrid
+                        snapGrid={[20, 20]}
+                        minZoom={0.5}
+                        maxZoom={2}
+                        fitView
+                        attributionPosition="bottom-left">
+                            <Background />
+                            <Controls />
+                            <MiniMap />
+                    </ReactFlow>
+                </div>
+                { showWindow && 
+                    <NodeFormWindow 
+                        id={nodeId? nodeId : ''}
+                        title={nodeFormData.title}
+                        description={nodeFormData.description}
+                        onInputChange={handleInputChange}
+                        onClose={handleCloseWindow}/>}
+                <Panel />
+            </>
         </ReactFlowProvider>
     )
 }

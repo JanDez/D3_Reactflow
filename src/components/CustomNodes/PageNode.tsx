@@ -14,11 +14,11 @@ const PageNode = ({ id, data, isConnectable }: NodeProps) => {
             <div className="element-node">
                 <CustomNodeHeader 
                     id={id}
-                    content="Page Node"
+                    content={data.title}
                     onEditHeader={() => console.log('edit header', id)} />
                 <CustomNodeBody
                     id={id}
-                    content="node content"
+                    content={data.description}
                     onEditBody={() => console.log('edit body', id)} />
             </div>
             <Handle

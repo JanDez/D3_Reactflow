@@ -14,3 +14,8 @@ export interface PanelItemData {
     subTitle: string 
     type: PanelDataTypes
 }
+
+export interface NodeFormData {
+    title: string
+    description: string
+}
