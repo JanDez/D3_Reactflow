@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { 
     addEdge, 
     Background, 
@@ -58,10 +58,21 @@ const AppCanvas = () => {
     const [ nodes, setNodes, handleNodesChange ] = useNodesState(initialNodes)
     const [ edges, setEdges, handleEdgesChange ] = useEdgesState([])
     const [ reactFlowInstance, setReactFlowInstance ] = useState<ReactFlowInstance | null>(null)
+    const [ currentNode, setCurrentNode ] = useState<Node | null>(null)
+    const [ nodeId, setNodeId] = useState<string | null>(null)
     
     const [ showWindow, setShowWindow ] = useState(false)
 
-    const handleShowWindow = () => {
+    useEffect(() => {
+        if (showWindow) {
+            const node = nodes.find(node => node.id === nodeId)
+    
+            if (node) setCurrentNode(node)
+        }
+    }, [  nodes, nodeId, showWindow ])
+
+    const handleShowWindow = (nodeId: string) => {
+        setNodeId(nodeId)
         setShowWindow(true)
     }
 
@@ -137,7 +148,7 @@ const AppCanvas = () => {
                 </ReactFlow>
             </div>
             { showWindow && <Window 
-                    content={ <p>Window Content</p> } 
+                    data={currentNode} 
                     onClose={handleCloseWindow}/>}
             <Panel />
         </ReactFlowProvider>

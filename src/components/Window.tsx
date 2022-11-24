@@ -1,9 +1,11 @@
+import { Node } from "reactflow"
+
 interface WindowProps {
-    content: JSX.Element | JSX.Element[]
+    data: Node | null
     onClose: () => void
 }
 
-const Window = ({ content, onClose }: WindowProps) => {
+const Window = ({ data, onClose }: WindowProps) => {
     return (
         <div className="window-container">
             <div className="window">
@@ -14,7 +16,7 @@ const Window = ({ content, onClose }: WindowProps) => {
                         type="button">X</button>
                 </div>
                 <div className="window-content">
-                    {content}
+                    <p>{data?.id}</p>
                 </div>
             </div>
         </div>

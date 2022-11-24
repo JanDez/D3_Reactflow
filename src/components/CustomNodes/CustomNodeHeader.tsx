@@ -8,7 +8,7 @@ const CustomNodeHeader = ({ id, content, onEditHeader }: CustomNodeHeaderProps) 
     return (
         <div onClick={() => onEditHeader(id)} className="custom-node-header">
             <p className="content">
-                {content}
+                {content}: {id}
             </p>
         </div>
     )
