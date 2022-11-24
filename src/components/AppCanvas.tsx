@@ -43,10 +43,11 @@ const AppCanvas = () => {
     const {
         handleConnect,
         handleDragOver,
-        handleDrop,
+        handleDrop
     } = useReactCanvasHandlers({ 
             reactFlowContainer, 
             reactFlowInstance,
+            nodes,
             setEdges,
             setNodes, 
             generateNodeId, 

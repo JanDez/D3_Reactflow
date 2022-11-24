@@ -15,7 +15,8 @@ const PageNode = ({ id, data, isConnectable }: NodeProps) => {
                 <CustomNodeHeader 
                     id={id}
                     content={data.title}
-                    onEditHeader={() => data.onEditHeader(id)} />
+                    onEditHeader={data.onEditHeader}
+                    onAddDefaultNode={data.onAddDefaultNode} />
                 <CustomNodeBody
                     id={id}
                     content={data.description}

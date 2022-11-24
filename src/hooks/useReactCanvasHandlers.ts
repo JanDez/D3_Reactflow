@@ -4,6 +4,7 @@ import { addEdge, Connection, Edge, Node, ReactFlowInstance } from "reactflow"
 interface UseReactCanvasHandlersProps {
     reactFlowContainer: React.MutableRefObject<HTMLDivElement | null>
     reactFlowInstance: ReactFlowInstance<any, any> | null
+    nodes: Node<any>[]
     setEdges: React.Dispatch<React.SetStateAction<Edge<any>[]>>
     setNodes: React.Dispatch<React.SetStateAction<Node<any>[]>>
     generateNodeId: () => string
@@ -14,10 +15,40 @@ const useReactCanvasHandlers = ({
     reactFlowContainer, 
     reactFlowInstance, 
     generateNodeId, 
+    nodes,
     setNodes, 
     setEdges,
     handleShowWindow
 }: UseReactCanvasHandlersProps) => {
+
+    const createDefaultNodeFromCustomNode = (nodeId: string, nodes: Node<any>[]) => {
+        const actionNode = nodes.find(node => node.id === nodeId)
+
+        if (actionNode && reactFlowInstance) {
+            const position = reactFlowInstance.project({
+                x: actionNode.position.x + 50,
+                y: actionNode.position.y + 50
+            })
+
+            const id = generateNodeId()
+            const newNode: Node<any> = {
+                id,
+                type: 'default',
+                position,
+                data: {
+                    label: `text ${id}`
+                },
+            }
+            
+            return nodes.concat(newNode)
+        }
+
+        return nodes
+    }
+
+    const handleAddDefaultNode = useCallback((nodeId: string) => {
+        setNodes((pnodes) => createDefaultNodeFromCustomNode(nodeId, pnodes))
+    }, [ setNodes, reactFlowInstance, generateNodeId, nodes ])
 
     const handleDeleteEdge = useCallback((edgeId: string) => {
         setEdges((edgs) => edgs.filter(edg => edg.id !== edgeId))
@@ -51,7 +82,7 @@ const useReactCanvasHandlers = ({
             })
 
             const id = generateNodeId()
-            const newNode: Node<any>= {
+            const newNode: Node<any> = {
                 id,
                 type,
                 position,
@@ -59,17 +90,19 @@ const useReactCanvasHandlers = ({
                     label: `${type} node`, 
                     title: `Title ${id}`,
                     description: `Description ${id}`,
-                    onEditHeader: handleShowWindow }
+                    onEditHeader: handleShowWindow,
+                    onAddDefaultNode: handleAddDefaultNode }
             }
 
             setNodes((pnodes) => pnodes.concat(newNode))
         }
-    }, [reactFlowInstance, setNodes])
+    }, [reactFlowInstance, reactFlowContainer, setNodes, generateNodeId, handleShowWindow, handleAddDefaultNode])
 
     return {
         handleConnect,
         handleDragOver,
-        handleDrop
+        handleDrop,
+        handleAddDefaultNode
     }
 }
 
