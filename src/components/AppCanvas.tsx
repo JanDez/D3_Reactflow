@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useRef, useState } from "react"
 import { 
     addEdge, 
     Background, 
@@ -22,7 +22,7 @@ import './index.css'
 
 import Panel from "./Panel"
 import NodeFormWindow from "./NodeFormWindow"
-import { NodeFormData } from "../core/types"
+import useNodeFormWindow from "../hooks/useNodeFormWindow"
 
 let id = 0
 const generateNodeId = () => `dndnode_${id++}`
@@ -54,57 +54,19 @@ const initialNodes = [
     { id: 'ewb-4', data: { label: 'Node 2' }, position: { x: 250, y: 450 } },
 ];
 
-const initialNodeData: NodeFormData = {
-    title: '',
-    description: ''
-}
-
 const AppCanvas = () => {
     const reactFlowContainer = useRef<HTMLDivElement | null>(null)
     const [ nodes, setNodes, handleNodesChange ] = useNodesState(initialNodes)
     const [ edges, setEdges, handleEdgesChange ] = useEdgesState([])
     const [ reactFlowInstance, setReactFlowInstance ] = useState<ReactFlowInstance | null>(null)
-    const [ nodeId, setNodeId] = useState<string | null>(null)
-    const [ showWindow, setShowWindow ] = useState(false)
 
-    const [ nodeFormData, setNodeFormData ] = useState<NodeFormData>({...initialNodeData})
-
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        console.log(nodeFormData)
-        const nformData = {...nodeFormData}
-
-        if (e.target.id === 'title') nformData.title = e.target.value
-        else nformData.description = e.target.value
-
-        setNodeFormData(nformData)
-    }
-
-    useEffect(() => {
-        console.log('use effect')
-        if (showWindow) {
-            const node = nodes.find(node => node.id === nodeId) as Node
-
-            console.log(node)
-    
-            if (node) {
-                console.log('the node i got', node)
-                setNodeId(node.id)
-                setNodeFormData({
-                    title: node.data.title,
-                    description: node.data.description
-                })
-            }
-        }
-    }, [ nodes, nodeId, showWindow ])
-
-    const handleShowWindow = (nodeId: string) => {
-        setNodeId(nodeId)
-        setShowWindow(true)
-    }
-
-    const handleCloseWindow = () => {
-        setShowWindow(false)
-    }
+    const { 
+        showWindow, 
+        nodeId, 
+        nodeFormData, 
+        handleCloseWindow, 
+        handleInputChange, 
+        handleShowWindow } = useNodeFormWindow({ nodes })
 
     const handleDeleteEdge = useCallback((edgeId: string) => {
         setEdges((edgs) => edgs.filter(edg => edg.id !== edgeId))
