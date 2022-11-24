@@ -21,6 +21,7 @@ import PageNode from "./CustomNodes/PageNode"
 import './index.css'
 
 import Panel from "./Panel"
+import Window from "./Window"
 
 let id = 0
 const generateNodeId = () => `dndnode_${id++}`
@@ -57,6 +58,16 @@ const AppCanvas = () => {
     const [ nodes, setNodes, handleNodesChange ] = useNodesState(initialNodes)
     const [ edges, setEdges, handleEdgesChange ] = useEdgesState([])
     const [ reactFlowInstance, setReactFlowInstance ] = useState<ReactFlowInstance | null>(null)
+    
+    const [ showWindow, setShowWindow ] = useState(false)
+
+    const handleShowWindow = () => {
+        setShowWindow(true)
+    }
+
+    const handleCloseWindow = () => {
+        setShowWindow(false)
+    }
 
     const handleDeleteEdge = useCallback((edgeId: string) => {
         setEdges((edgs) => edgs.filter(edg => edg.id !== edgeId))
@@ -93,7 +104,7 @@ const AppCanvas = () => {
                 id: generateNodeId(),
                 type,
                 position,
-                data: { label: `${type} node` }
+                data: { label: `${type} node`, onEditHeader: handleShowWindow }
             }
 
             setNodes((pnodes) => pnodes.concat(newNode))
@@ -125,6 +136,9 @@ const AppCanvas = () => {
                         <MiniMap />
                 </ReactFlow>
             </div>
+            { showWindow && <Window 
+                    content={ <p>Window Content</p> } 
+                    onClose={handleCloseWindow}/>}
             <Panel />
         </ReactFlowProvider>
     )

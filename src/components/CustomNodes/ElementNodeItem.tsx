@@ -1,6 +1,8 @@
 import { Handle, NodeProps, Position } from "reactflow"
+import CustomNodeBody from "./CustomNodeBody"
+import CustomNodeHeader from "./CustomNodeHeader"
 
-const ElementNodeItem = ({ isConnectable }: NodeProps) => {
+const ElementNodeItem = ({ id, isConnectable }: NodeProps) => {
     return (
         <>
             <Handle
@@ -10,7 +12,14 @@ const ElementNodeItem = ({ isConnectable }: NodeProps) => {
                 onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={isConnectable} />
             <div className="element-node">
-                <p>Element Node Item</p>
+                <CustomNodeHeader 
+                    id={id}
+                    content="Node Item header"
+                    onEditHeader={() => console.log('edit header', id)} />
+                <CustomNodeBody
+                    id={id}
+                    content="Node Item body" 
+                    onEditBody={() => console.log('edit header', id)}/>
             </div>
             <Handle
                 type="target"

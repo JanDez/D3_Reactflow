@@ -1,10 +1,12 @@
 interface CustomNodeHeaderProps {
+    id: string 
     content: string
+    onEditHeader: (id: string) => void
 }
 
-const CustomNodeHeader = ({ content }: CustomNodeHeaderProps) => {
+const CustomNodeHeader = ({ id, content, onEditHeader }: CustomNodeHeaderProps) => {
     return (
-        <div className="custom-node-header">
+        <div onClick={() => onEditHeader(id)} className="custom-node-header">
             <p className="content">
                 {content}
             </p>

@@ -68,36 +68,20 @@
     padding: 30px;
 }
 
-.dndflow aside .description {
-    margin-bottom: 10px;
-}
-
-.dndflow .dndnode {
-    height: 20px;
-    padding: 4px;
-    border: 1px solid #1a192b;
-    border-radius: 2px;
-    margin-bottom: 10px;
+.window-container {
     display: flex;
-    justify-content: center;
     align-items: center;
-    cursor: grab;
+    justify-content: center;
+    background-color: rgba(0, 80, 150, 0.6);
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: 3;
 }
 
-.dndflow .dndnode.input {
-    border-color: #0041d0;
-}
-
-.dndflow .dndnode.output {
-    border-color: #ff0072;
-}
-
-.dndflow .selectall {
-    margin-top: 10px;
-}
-
-@media screen and (min-width: 768px) {
-    .dndflow {
-        flex-direction: row;
-    }
+.window {
+    display: flex;
+    background-color: white;
+    height: 300px;
+    width: 300px;
 }

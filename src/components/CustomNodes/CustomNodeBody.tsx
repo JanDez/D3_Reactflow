@@ -1,11 +1,15 @@
 interface CustomNodeBodyProps {
+    id: string
     content: string 
+    onEditBody: (nodeId: string) => void
 }
 
-const CustomNodeBody = ({ content }: CustomNodeBodyProps) => {
+const CustomNodeBody = ({ id, content, onEditBody }: CustomNodeBodyProps) => {
     return (
-        <div className="custom-node-body">
-            <p className="node-body">{content}</p>
+        <div onClick={() => onEditBody(id)} className="custom-node-body">
+            <p className="node-body">
+                {content}
+            </p>
         </div>
     )
 }
