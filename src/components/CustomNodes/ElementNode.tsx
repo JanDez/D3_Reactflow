@@ -11,7 +11,7 @@ const ElementNode = ({ id, data, isConnectable }: NodeProps) => {
                 style={{ background: '#555' }}
                 onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={isConnectable} />
-            <div className="element-node">
+            <div className="element-node custom-node">
                 <CustomNodeHeader 
                     id={id}
                     content={data.title}

@@ -11,29 +11,26 @@ interface NodeDetailsFormProps {
 const NodeDetailsForm = ({ id, title, description, onInputChange, onSaveChanges }: NodeDetailsFormProps) => {
     return (
         <div className="form-container">
-            <p>{id}</p>
-            <p>{title}</p>
-            <p>{description}</p>
-            
             <form className="form">
                 <div className="form-field">
-                    <label htmlFor="title">Title</label>
+                    <label className="input-label" htmlFor="title">Title</label>
                     <input 
                         onChange={onInputChange} 
+                        className="input-text"
                         id="title" 
                         type="text" 
                         value={title} />
                 </div>
                 <div className="form-field">
-                    <label htmlFor="description">Description</label>
+                    <label className="input-label" htmlFor="description">Description</label>
                     <input 
                         onChange={onInputChange}
+                        className='input-text'
                         id="description" 
                         type="text" 
                         value={description} />
                 </div>
-
-                <button onClick={onSaveChanges} type="button">Save</button>
+                <button onClick={onSaveChanges} className="save-btn" type="button">Save</button>
             </form>
         </div>
     )

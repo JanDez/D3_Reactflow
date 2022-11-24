@@ -71,7 +71,7 @@ const AppCanvas = () => {
                         snapToGrid
                         snapGrid={[20, 20]}
                         minZoom={0.5}
-                        maxZoom={2}
+                        maxZoom={1.2}
                         fitView
                         attributionPosition="bottom-left">
                             <Background />

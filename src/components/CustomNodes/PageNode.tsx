@@ -6,16 +6,16 @@ const PageNode = ({ id, data, isConnectable }: NodeProps) => {
     return (
         <>
             <Handle
-                type='target'
+                type='source'
                 position={Position.Left}
                 style={{ background: '#555' }}
                 onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={isConnectable} />
-            <div className="element-node">
+            <div className="page-node custom-node">
                 <CustomNodeHeader 
                     id={id}
                     content={data.title}
-                    onEditHeader={() => console.log('edit header', id)} />
+                    onEditHeader={() => data.onEditHeader(id)} />
                 <CustomNodeBody
                     id={id}
                     content={data.description}

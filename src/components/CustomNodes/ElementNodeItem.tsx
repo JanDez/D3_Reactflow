@@ -11,11 +11,11 @@ const ElementNodeItem = ({ id, data, isConnectable }: NodeProps) => {
                 style={{ background: '#555' }}
                 onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={isConnectable} />
-            <div className="element-node">
+            <div className="element-node-item custom-node">
                 <CustomNodeHeader 
                     id={id}
                     content={data.title}
-                    onEditHeader={() => console.log('edit header', id)} />
+                    onEditHeader={() => data.onEditHeader(id)} />
                 <CustomNodeBody
                     id={id}
                     content={data.description} 
