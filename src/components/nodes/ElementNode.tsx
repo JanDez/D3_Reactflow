@@ -1,4 +1,5 @@
 import { Handle, NodeProps, Position } from "reactflow"
+import { SElementNode } from "../../styledComponents/CustomNodes.styles"
 import CustomNodeBody from "./CustomNodeBody"
 import CustomNodeHeader from "./CustomNodeHeader"
 
@@ -11,7 +12,7 @@ const ElementNode = ({ id, data, isConnectable }: NodeProps) => {
                 style={{ background: '#555' }}
                 onConnect={(params) => console.log('handle onConnect', params)}
                 isConnectable={isConnectable} />
-            <div className="element-node custom-node">
+            <SElementNode>
                 <CustomNodeHeader 
                     id={id}
                     content={data.title}
@@ -21,7 +22,7 @@ const ElementNode = ({ id, data, isConnectable }: NodeProps) => {
                     id={id}
                     content={data.description}
                     onEditBody={() => console.log('edit body', id)}/>
-            </div>
+            </SElementNode>
             <Handle
                 type="target"
                 position={Position.Right}

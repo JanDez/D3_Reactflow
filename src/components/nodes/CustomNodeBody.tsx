@@ -1,3 +1,5 @@
+import { SCustomNodeBody, SNodeBody } from "../../styledComponents/CustomNodes.styles"
+
 interface CustomNodeBodyProps {
     id: string
     content: string 
@@ -6,11 +8,13 @@ interface CustomNodeBodyProps {
 
 const CustomNodeBody = ({ id, content, onEditBody }: CustomNodeBodyProps) => {
     return (
-        <div onClick={() => onEditBody(id)} className="custom-node-body">
-            <p className="node-body">
-                {content}
-            </p>
-        </div>
+        <SCustomNodeBody 
+            onClick={() => onEditBody(id)} 
+            className="custom-node-body">
+                <SNodeBody>
+                    {content}
+                </SNodeBody>
+        </SCustomNodeBody>
     )
 }
 

@@ -1,3 +1,5 @@
+import { SAddNodeBtn, SCustomNodeHeader, SHeaderContent } from "../../styledComponents/CustomNodes.styles"
+
 interface CustomNodeHeaderProps {
     id: string 
     content: string
@@ -7,12 +9,15 @@ interface CustomNodeHeaderProps {
 
 const CustomNodeHeader = ({ id, content, onEditHeader, onAddDefaultNode }: CustomNodeHeaderProps) => {
     return (
-        <div className="custom-node-header">
-            <p onClick={() => onEditHeader(id)} className="content">
+        <SCustomNodeHeader className="custom-node-header">
+            <SHeaderContent onClick={() => onEditHeader(id)}>
                 {content}
-            </p>
-            <button onClick={() => onAddDefaultNode(id)} className="add-node-btn">+</button>
-        </div>
+            </SHeaderContent>
+            <SAddNodeBtn 
+                onClick={() => onAddDefaultNode(id)}>
+                    
+            </SAddNodeBtn>
+        </SCustomNodeHeader>
     )
 }
 

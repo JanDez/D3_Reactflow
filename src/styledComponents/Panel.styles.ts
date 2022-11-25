@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
-export const PanelContainer = styled.div`
+export const SPanelContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-grow: 1;
 `
-export const Panel = styled.div`
+export const SPanel = styled.aside`
     display: flex;
     border-right: 1px solid #eee;
     background: rgba(31, 41, 100, 1);
@@ -18,7 +18,7 @@ export const Panel = styled.div`
     width: 80px;
 `
 
-export const PanelListContainer = styled.div`
+export const SPanelListContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,13 +26,13 @@ export const PanelListContainer = styled.div`
     width: 100%;
 `
 
-export const PanelList = styled.div`
+export const SPanelList = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
 `
 
-export const PanelItem = styled.div`
+export const SPanelItem = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
@@ -42,7 +42,7 @@ export const PanelItem = styled.div`
     }
 `
 
-export const PanelItemInfo = styled.div`
+export const SPanelItemInfo = styled.div`
     background-color: rgba(31, 41, 100, 1);
     border: 1px white solid;
     color: white;

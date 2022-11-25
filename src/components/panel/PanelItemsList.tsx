@@ -1,5 +1,9 @@
 import dataPanel from "../../core/panelData";
 import { DiagramNodeType, panelTypeMapsToDiagramNode } from "../../core/types";
+import {
+  SPanelList,
+  SPanelListContainer,
+} from "../../styledComponents/Panel.styles";
 import PanelItem from "./PanelItem";
 
 interface PanelItemsListProps {
@@ -11,8 +15,8 @@ interface PanelItemsListProps {
 
 const PanelItemsList = ({ onDragStart }: PanelItemsListProps) => {
   return (
-    <div className="panel-list-container">
-      <div className="panel-list">
+    <SPanelListContainer>
+      <SPanelList>
         {dataPanel.map((itemData, index) => (
           <PanelItem
             data={itemData}
@@ -23,8 +27,8 @@ const PanelItemsList = ({ onDragStart }: PanelItemsListProps) => {
             key={index}
           />
         ))}
-      </div>
-    </div>
+      </SPanelList>
+    </SPanelListContainer>
   );
 };
 

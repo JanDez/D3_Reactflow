@@ -1,4 +1,8 @@
 import { PanelItemData, DiagramNodeType } from "../../core/types";
+import {
+  SPanelItem,
+  SPanelItemInfo,
+} from "../../styledComponents/Panel.styles";
 
 interface PanelItemProps {
   data: PanelItemData;
@@ -11,15 +15,14 @@ interface PanelItemProps {
 
 const PanelItem = ({ data, nodeType, onDragStart }: PanelItemProps) => {
   return (
-    <div id={data.id} className="panel-item">
-      <div
-        className="panel-item-info"
+    <SPanelItem id={data.id}>
+      <SPanelItemInfo
         onDragStart={(event) => onDragStart(event, nodeType)}
         draggable
       >
         {data.id}
-      </div>
-    </div>
+      </SPanelItemInfo>
+    </SPanelItem>
   );
 };
 

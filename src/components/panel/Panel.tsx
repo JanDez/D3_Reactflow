@@ -1,3 +1,4 @@
+import { SPanelContainer, SPanel } from "../../styledComponents/Panel.styles";
 import PanelItemsList from "./PanelItemsList";
 
 const Panel = () => {
@@ -7,11 +8,11 @@ const Panel = () => {
   };
 
   return (
-    <div className="panel-container">
-      <aside className="panel">
+    <SPanelContainer>
+      <SPanel>
         <PanelItemsList onDragStart={onDragStart} />
-      </aside>
-    </div>
+      </SPanel>
+    </SPanelContainer>
   );
 };
 

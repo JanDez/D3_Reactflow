@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react"
+import { SForm, SFormContainer, SFormField, SInputLabel, SInputText, SSaveBtn } from "../styledComponents/Form.styles"
 
 interface NodeDetailsFormProps {
     id: string 
@@ -10,29 +11,31 @@ interface NodeDetailsFormProps {
 
 const NodeDetailsForm = ({ id, title, description, onInputChange, onSaveChanges }: NodeDetailsFormProps) => {
     return (
-        <div className="form-container">
-            <form className="form">
-                <div className="form-field">
-                    <label className="input-label" htmlFor="title">Title</label>
-                    <input 
+        <SFormContainer>
+            <SForm>
+                <SFormField>
+                    <SInputLabel htmlFor="title" >Title</SInputLabel>
+                    <SInputText 
                         onChange={onInputChange} 
-                        className="input-text"
                         id="title" 
                         type="text" 
                         value={title} />
-                </div>
-                <div className="form-field">
-                    <label className="input-label" htmlFor="description">Description</label>
-                    <input 
-                        onChange={onInputChange}
-                        className='input-text'
+                </SFormField>
+                <SFormField>    
+                    <SInputLabel htmlFor="description">Description</SInputLabel>
+                    <SInputText 
+                        onChange={onInputChange} 
                         id="description" 
                         type="text" 
                         value={description} />
-                </div>
-                <button onClick={onSaveChanges} className="save-btn" type="button">Save</button>
-            </form>
-        </div>
+                </SFormField>
+                <SSaveBtn 
+                    onClick={onSaveChanges} 
+                    type="button">
+                        Save
+                </SSaveBtn>
+            </SForm>
+        </SFormContainer>
     )
 }
 
