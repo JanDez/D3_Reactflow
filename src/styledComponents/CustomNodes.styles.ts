@@ -6,17 +6,17 @@ const CustomNodeStyles = `
     box-shadow: 0 0 4px;
     border-radius: 5px;
     background-color: white;
-    min-width: 200px;
-    max-width: 200px;
+    min-width: 250px;
+    max-width: 250px;
 `
 
 export const SCustomNodeHeader = styled.div`
     display: flex;
     align-items: center;
-    cursor: pointer;
+    position: relative;
     color: white;
     font-size: 14px;
-    padding: 10px;
+    padding: 25px 15px 15px 15px;
 `
 
 export const SCustomNodeBody = styled.div`
@@ -58,7 +58,12 @@ export const SNodeBody = styled.p`
 `
 
 export const SHeaderContent = styled.p`
+    cursor: pointer;
     margin: 0;
+    
+    .icon {
+        margin-left: 10px;
+    }
 `
 
 export const SAddNodeBtn = styled.button`
@@ -66,9 +71,36 @@ export const SAddNodeBtn = styled.button`
     align-items: center;
     justify-content: center;
     color: white;
+    border: none;
+    cursor: pointer; 
     font-weight: bolder;
+    background-color: transparent;
+    margin-left: auto;
+    font-size: 18px;
+
+    &:hover {
+        color: blue;
+    }
+`
+
+export const SCloseBtn = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1f2964;
+    border: 2px #1f2964 solid;
     border-radius: 50%;
-    margin-left: 10px;
-    height: 25px;
-    width: 25px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    top: calc(-60% + 25px);
+    left: calc(103% - 25px);
+    position: absolute;
+    height: 30px;
+    width: 30px;
+
+    &:hover {
+        background-color: white;
+        color: #1f2964;
+    }
 `

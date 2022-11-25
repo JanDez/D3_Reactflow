@@ -50,6 +50,10 @@ const useReactCanvasHandlers = ({
         setNodes((pnodes) => createDefaultNodeFromCustomNode(nodeId, pnodes))
     }, [ setNodes, reactFlowInstance, generateNodeId, nodes ])
 
+    const handleDeleteNode = useCallback((nodeId: string) => {
+        setNodes((pnodes) => pnodes.filter(nd => nd.id !== nodeId))
+    }, [ setNodes ])
+
     const handleDeleteEdge = useCallback((edgeId: string) => {
         setEdges((edgs) => edgs.filter(edg => edg.id !== edgeId))
     }, [setEdges])
@@ -91,7 +95,8 @@ const useReactCanvasHandlers = ({
                     title: `Title ${id}`,
                     description: `Description ${id}`,
                     onEditHeader: handleShowWindow,
-                    onAddDefaultNode: handleAddDefaultNode }
+                    onAddDefaultNode: handleAddDefaultNode,
+                    onRemoveNode: handleDeleteNode }
             }
 
             setNodes((pnodes) => pnodes.concat(newNode))
