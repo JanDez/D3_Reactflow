@@ -7,13 +7,13 @@ import {
 } from "reactflow";
 
 import "reactflow/dist/style.css";
-import "./index.css";
 
 import Panel from "./panel/Panel";
 import NodeFormWindow from "./NodeFormWindow";
 import useNodeFormWindow from "../hooks/useNodeFormWindow";
 import useReactCanvasData from "../hooks/useReactCanvasData";
 import useReactCanvasHandlers from "../hooks/useReactCanvasHandlers";
+import { SAppDiagram } from "../styledComponents/AppDiagram";
 
 const AppCanvas = () => {
   const {
@@ -55,29 +55,29 @@ const AppCanvas = () => {
   return (
     <ReactFlowProvider>
       <>
-        <div className="reactflow-container" ref={reactFlowContainer}>
-          <ReactFlow
-            nodes={nodes}
-            edges={edges}
-            nodeTypes={nodeTypes}
-            edgeTypes={edgeTypes}
-            onInit={setReactFlowInstance}
-            onConnect={handleConnect}
-            onNodesChange={handleNodesChange}
-            onEdgesChange={handleEdgesChange}
-            onDragOver={handleDragOver}
-            onDrop={handleDrop}
-            snapToGrid
-            snapGrid={[20, 20]}
-            minZoom={0.5}
-            maxZoom={1.2}
-            fitView
-            attributionPosition="bottom-left">
-              <Background />
-              <Controls />
-              <MiniMap />
-          </ReactFlow>
-        </div>
+        <SAppDiagram ref={reactFlowContainer} >
+            <ReactFlow
+              nodes={nodes}
+              edges={edges}
+              nodeTypes={nodeTypes}
+              edgeTypes={edgeTypes}
+              onInit={setReactFlowInstance}
+              onConnect={handleConnect}
+              onNodesChange={handleNodesChange}
+              onEdgesChange={handleEdgesChange}
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
+              snapToGrid
+              snapGrid={[20, 20]}
+              minZoom={0.5}
+              maxZoom={1.2}
+              fitView
+              attributionPosition="bottom-left">
+                <Background />
+                <Controls />
+                <MiniMap />
+            </ReactFlow>
+        </SAppDiagram>
         {showWindow && (
           <NodeFormWindow
             id={nodeId ? nodeId : ""}

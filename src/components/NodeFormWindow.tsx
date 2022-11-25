@@ -1,5 +1,6 @@
 import NodeDetailsForm from "./NodeDetailsForm"
 import { ChangeEvent } from 'react';
+import { SCloseBtn, SWindow, SWindowContainer, SWindowContent, SWindowTop } from "../styledComponents/Window.styles";
 
 interface WindowProps {
     id: string 
@@ -12,24 +13,23 @@ interface WindowProps {
 
 const NodeFormWindow = ({ id, title, description, onInputChange, onSaveChanges, onClose }: WindowProps) => {
     return (
-        <div className="window-container">
-            <div className="window">
-                <div className="window-top">
-                    <button 
+        <SWindowContainer>
+            <SWindow>
+                <SWindowTop>
+                    <SCloseBtn
                         onClick={onClose} 
-                        className="close-btn" 
-                        type="button">X</button>
-                </div>
-                <div className="window-content">
+                        type="button">X</SCloseBtn>
+                </SWindowTop>
+                <SWindowContent>
                     <NodeDetailsForm 
-                        id={id} 
-                        title={title} 
-                        description={description} 
-                        onInputChange={onInputChange} 
-                        onSaveChanges={onSaveChanges}/>
-                </div>
-            </div>
-        </div>
+                            id={id} 
+                            title={title} 
+                            description={description} 
+                            onInputChange={onInputChange} 
+                            onSaveChanges={onSaveChanges}/>
+                </SWindowContent>
+            </SWindow>
+        </SWindowContainer>
     )
 }
 

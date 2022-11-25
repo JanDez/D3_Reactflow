@@ -1,10 +1,6 @@
-.reactflow-container {
-    flex-grow: 1;
-    height: 100%;
-    width: 100%;
-}
+import styled from "styled-components";
 
-.window-container {
+export const SWindowContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,9 +9,8 @@
     height: 100vh;
     width: 100%;
     z-index: 3;
-}
-
-.window {
+`
+export const SWindow = styled.div`
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -24,21 +19,20 @@
     padding: 25px 30px;
     height: 320px;
     width: 280px;
-}
-
-.window-content {
+`
+export const SWindowContent = styled.div`
     display: flex;
     height: 100%;
     width: 100%;
-}
+`
 
-.window-top {
+export const SWindowTop = styled.div`
     display: flex;
     justify-content: flex-end;
     width: 100%;
-}
+`
 
-.close-btn {
+export const SCloseBtn = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,9 +47,9 @@
     margin: 0;
     height: 25px;
     width: 25px;
-}
 
-.close-btn:hover {
-    background-color: white;
-    color: rgba(31, 41, 100, 1);
-}
+    &:hover {
+        background-color: white;
+        color: rgba(31, 41, 100, 1);
+    }
+`

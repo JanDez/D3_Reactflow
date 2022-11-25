@@ -21,6 +21,7 @@ const useReactCanvasHandlers = ({
 }: UseReactCanvasHandlersProps) => {
 
     const handleAddDefaultNode = useCallback((nodeId: string) => {
+        console.log('add default node')
         setNodes((pnodes) => {
             const actionNode = pnodes.find(node => node.id === nodeId)
 
