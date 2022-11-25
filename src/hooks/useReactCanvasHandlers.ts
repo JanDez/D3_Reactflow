@@ -15,40 +15,37 @@ const useReactCanvasHandlers = ({
     reactFlowContainer, 
     reactFlowInstance, 
     generateNodeId, 
-    nodes,
     setNodes, 
     setEdges,
     handleShowWindow
 }: UseReactCanvasHandlersProps) => {
 
-    const createDefaultNodeFromCustomNode = (nodeId: string, nodes: Node<any>[]) => {
-        const actionNode = nodes.find(node => node.id === nodeId)
-
-        if (actionNode && reactFlowInstance) {
-            const position = reactFlowInstance.project({
-                x: actionNode.position.x + 50,
-                y: actionNode.position.y + 50
-            })
-
-            const id = generateNodeId()
-            const newNode: Node<any> = {
-                id,
-                type: 'default',
-                position,
-                data: {
-                    label: `text ${id}`
-                },
-            }
-            
-            return nodes.concat(newNode)
-        }
-
-        return nodes
-    }
-
     const handleAddDefaultNode = useCallback((nodeId: string) => {
-        setNodes((pnodes) => createDefaultNodeFromCustomNode(nodeId, pnodes))
-    }, [ setNodes, reactFlowInstance, generateNodeId, nodes ])
+        setNodes((pnodes) => {
+            const actionNode = pnodes.find(node => node.id === nodeId)
+
+            if (actionNode && reactFlowInstance) {
+                const position = reactFlowInstance.project({
+                    x: actionNode.position.x + 50,
+                    y: actionNode.position.y + 50
+                })
+    
+                const id = generateNodeId()
+                const newNode: Node<any> = {
+                    id,
+                    type: 'default',
+                    position,
+                    data: {
+                        label: `text ${id}`
+                    },
+                }
+                
+                return pnodes.concat(newNode)
+            }
+    
+            return pnodes
+        })
+    }, [ setNodes, generateNodeId, reactFlowInstance ])
 
     const handleDeleteNode = useCallback((nodeId: string) => {
         setNodes((pnodes) => pnodes.filter(nd => nd.id !== nodeId))
@@ -101,7 +98,7 @@ const useReactCanvasHandlers = ({
 
             setNodes((pnodes) => pnodes.concat(newNode))
         }
-    }, [reactFlowInstance, reactFlowContainer, setNodes, generateNodeId, handleShowWindow, handleAddDefaultNode])
+    }, [reactFlowInstance, reactFlowContainer, setNodes, generateNodeId, handleShowWindow, handleAddDefaultNode, handleDeleteNode])
 
     return {
         handleConnect,

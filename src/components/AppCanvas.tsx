@@ -72,11 +72,10 @@ const AppCanvas = () => {
             minZoom={0.5}
             maxZoom={1.2}
             fitView
-            attributionPosition="bottom-left"
-          >
-            <Background />
-            <Controls />
-            <MiniMap />
+            attributionPosition="bottom-left">
+              <Background />
+              <Controls />
+              <MiniMap />
           </ReactFlow>
         </div>
         {showWindow && (
@@ -86,8 +85,7 @@ const AppCanvas = () => {
             description={nodeFormData.description}
             onSaveChanges={handleSaveChanges}
             onInputChange={handleInputChange}
-            onClose={handleCloseWindow}
-          />
+            onClose={handleCloseWindow} />
         )}
         <Panel />
       </>
