@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {BiPencil} from 'react-icons/bi'
 import { SAddNodeBtn, SCloseBtn, SCustomNodeHeader, SHeaderContent } from "../../styledComponents/CustomNodes.styles"
 
 interface CustomNodeHeaderProps {
@@ -14,11 +14,11 @@ const CustomNodeHeader = ({ id, content, onEditHeader, onAddDefaultNode , onRemo
         <SCustomNodeHeader className="custom-node-header">
             <SHeaderContent onClick={() => onEditHeader(id)}>
                 {content}
-                <FontAwesomeIcon icon={'pencil'}  className="icon"/>
+                <BiPencil className='icon' />
             </SHeaderContent>
             <SAddNodeBtn 
                 onClick={() => onAddDefaultNode(id)}>
-                    <FontAwesomeIcon icon={'add'} />
+                    +
             </SAddNodeBtn>
             <SCloseBtn onClick={() => onRemoveNode(id)}>x</SCloseBtn>
         </SCustomNodeHeader>

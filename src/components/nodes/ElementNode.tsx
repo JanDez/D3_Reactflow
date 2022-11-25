@@ -1,17 +1,16 @@
-import { Handle, NodeProps, Position } from "reactflow"
+import { NodeProps, Position } from "reactflow"
 import { SElementNode } from "../../styledComponents/CustomNodes.styles"
+import { SHandle } from "../../styledComponents/Edges.styles"
 import CustomNodeBody from "./CustomNodeBody"
 import CustomNodeHeader from "./CustomNodeHeader"
 
 const ElementNode = ({ id, data, isConnectable }: NodeProps) => {
     return (
         <>
-            <Handle
+            <SHandle 
                 type="source"
                 position={Position.Left}
-                style={{ background: '#555' }}
-                onConnect={(params) => console.log('handle onConnect', params)}
-                isConnectable={isConnectable} />
+                isConnectable={isConnectable}/>
             <SElementNode>
                 <CustomNodeHeader 
                     id={id}
@@ -24,12 +23,10 @@ const ElementNode = ({ id, data, isConnectable }: NodeProps) => {
                     content={data.description}
                     onEditBody={() => console.log('edit body', id)}/>
             </SElementNode>
-            <Handle
+            <SHandle 
                 type="target"
                 position={Position.Right}
-                style={{ background: '#555' }}
-                onConnect={(params) => console.log('handle onConnect', params)}
-                isConnectable={isConnectable} />
+                isConnectable={isConnectable}/>
         </>
     )
 }

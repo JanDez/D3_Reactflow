@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { BsShopWindow } from 'react-icons/bs';
 
 export const SPanelContainer = styled.div`
     display: flex;
@@ -43,16 +44,25 @@ export const SPanelItem = styled.div`
 `
 
 export const SPanelItemInfo = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     background-color: rgba(31, 41, 100, 1);
     border: 1px white solid;
     color: white;
     padding: 6px;
     width: 100%;
 
-    &:hover {
-        cursor: grab;
-        background-color: white;
-        color: rgba(31, 41, 100, 1);
-        border: 1px rgba(31, 41, 100, 1) solid;
+    .icon {
+        fill: white;
+        height: 20px;
+        width: 20px;
+    }
+
+    .blog-icon {
+        path {
+            fill: white;
+        }
     }
 `

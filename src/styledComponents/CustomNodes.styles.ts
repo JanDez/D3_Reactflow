@@ -60,10 +60,6 @@ export const SNodeBody = styled.p`
 export const SHeaderContent = styled.p`
     cursor: pointer;
     margin: 0;
-    
-    .icon {
-        margin-left: 10px;
-    }
 `
 
 export const SAddNodeBtn = styled.button`
@@ -79,7 +75,7 @@ export const SAddNodeBtn = styled.button`
     font-size: 18px;
 
     &:hover {
-        color: blue;
+        color: black;
     }
 `
 

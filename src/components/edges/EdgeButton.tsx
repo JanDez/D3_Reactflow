@@ -1,4 +1,5 @@
 import { EdgeProps, getBezierPath } from 'reactflow';
+import { SEdgeBtn, SPath } from '../../styledComponents/Edges.styles';
 
 const foreignObjectSize = 40;
 
@@ -24,7 +25,7 @@ const EdgeButton = ({
 
     return (
         <>
-            <path
+            <SPath
                 id={id}
                 className="react-flow__edge-path"
                 d={edgePath}
@@ -36,11 +37,9 @@ const EdgeButton = ({
                 y={labelY - foreignObjectSize / 2}
                 className="edgebutton-foreignobject"
                 requiredExtensions="http://www.w3.org/1999/xhtml">
-                    <div>
-                        <button className="edgebutton" onClick={() => data.handleDeleteEdge(id)}>
-                            ×
-                        </button>
-                    </div>
+                    <SEdgeBtn onClick={() => data.handleDeleteEdge(id)}>
+                        x
+                    </SEdgeBtn>
             </foreignObject>
         </>
     );
