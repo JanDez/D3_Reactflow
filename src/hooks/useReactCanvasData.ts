@@ -1,9 +1,9 @@
 import { useRef, useState } from "react"
 import { NodeTypes, ReactFlowInstance, useEdgesState, useNodesState } from "reactflow"
-import EdgeButton from "../components/CustomEdges/EdgeButton";
-import ElementNode from "../components/CustomNodes/ElementNode";
-import ElementNodeItem from "../components/CustomNodes/ElementNodeItem";
-import PageNode from "../components/CustomNodes/PageNode";
+import EdgeButton from "../components/edges/EdgeButton";
+import ElementNode from "../components/nodes/ElementNode";
+import ElementNodeItem from "../components/nodes/ElementNodeItem";
+import PageNode from "../components/nodes/PageNode";
 import { NodeFormData } from "../core/types";
 
 const edgeTypes = {

@@ -6,7 +6,7 @@ interface NodeDetailsFormProps {
     description: string 
     onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
     onSaveChanges: () => void
-}
+} 
 
 const NodeDetailsForm = ({ id, title, description, onInputChange, onSaveChanges }: NodeDetailsFormProps) => {
     return (
