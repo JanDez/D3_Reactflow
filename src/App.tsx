@@ -1,11 +1,10 @@
-import './App.css'
-import DiagramCanvas from './components/DiagramCanvas';
+import "./App.css";
+import AppCanvas from "./components/AppCanvas";
 
 function App() {
   return (
     <div className="App">
-      <DiagramCanvas />
-
+      <AppCanvas />
     </div>
   );
 }
