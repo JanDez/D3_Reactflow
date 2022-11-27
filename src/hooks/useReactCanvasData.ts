@@ -1,10 +1,11 @@
-import { useRef, useState } from "react"
-import { NodeTypes, ReactFlowInstance, useEdgesState, useNodesState } from "reactflow"
+import { useEffect, useRef, useState } from "react"
+import { Edge, Node, NodeTypes, ReactFlowInstance, useEdgesState, useNodesState } from "reactflow"
 import EdgeButton from "../components/edges/EdgeButton";
 import ElementNode from "../components/nodes/ElementNode";
 import ElementNodeItem from "../components/nodes/ElementNodeItem";
 import PageNode from "../components/nodes/PageNode";
 import { NodeFormData } from "../core/types";
+import LocalStorageService from "../services/LocalStorageService";
 
 const edgeTypes = {
     buttonEdge: EdgeButton,
@@ -16,13 +17,19 @@ const nodeTypes: NodeTypes = {
     elementNodeItem: ElementNodeItem
 }
 
-let id = 0
+const nodesStorageKey = 'appcanvas:nodes'
+const edgesStorageKey = 'appcanvas:edges'
+
+const initialNodes = LocalStorageService.getData(nodesStorageKey) as Node<any>[] ?? []
+const initialEdges = LocalStorageService.getData(edgesStorageKey) as Edge<any>[] ?? []
+
+let id = initialNodes.length - 1
 const generateNodeId = () => `dndnode_${id++}`
 
 const useReactCanvasData = () => {
     const reactFlowContainer = useRef<HTMLDivElement | null>(null)
-    const [ nodes, setNodes, handleNodesChange ] = useNodesState([])
-    const [ edges, setEdges, handleEdgesChange ] = useEdgesState([])
+    const [ nodes, setNodes, handleNodesChange ] = useNodesState(initialNodes)
+    const [ edges, setEdges, handleEdgesChange ] = useEdgesState(initialEdges)
     const [ reactFlowInstance, setReactFlowInstance ] = useState<ReactFlowInstance | null>(null)
 
     const updateNodeText = (nodeId: string, textData: NodeFormData) => {
@@ -40,6 +47,11 @@ const useReactCanvasData = () => {
             return item
         }))
     }
+
+    useEffect(() => {
+        LocalStorageService.saveData(nodesStorageKey, [...nodes])
+        LocalStorageService.saveData(edgesStorageKey, [...edges])
+    }, [ nodes, edges ])
 
     return {
         reactFlowContainer,
